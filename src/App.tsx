@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { Search, Star } from 'lucide-react'
+import { Loader, Search, Star } from 'lucide-react'
 import { ChangeEvent, useState } from 'react'
 
 export type Repo = {
@@ -94,7 +94,12 @@ export const App = () => {
 
       <div className="mt-10 p-4 flex flex-col gap-4">
         {Boolean(repos.length) && <h3>Top 5 repositories</h3>}
-        {loading && repos.length === 0 && <h3>Buscando repositórios...</h3>}
+
+        {loading && repos.length === 0 && (
+          <span className="flex items-center gap-2 justify-center py-4">
+            Buscando repositórios <Loader className="h-4 w-4 animate-spin" />
+          </span>
+        )}
 
         {repos.map(({ name, stars, language }) => (
           <div
